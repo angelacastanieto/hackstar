@@ -13,29 +13,36 @@ class App < Sinatra::Base
     path = params['path']
 
 
+    field_map = {
+      0 => [1,2,3],
+      1 => [4,5,6],
+      2 => [7,8,9],
+      3 => [10,11,12],
+      4 => [13,14,15]
+    }
+
     File.delete('form.pdf') if File.exist?('form.pdf')
     codes = params['codes']
 
     transformed_codes = []
 
-    codes.split(',').each do |code|
+    split_codes = codes.split(',')
+
+    split_codes.each do |code|
       transformed_codes << "'#{code}'"
     end
 
     conn = PG.connect( dbname: 'hh_proj' )
 
-    counter = 1
-
     conn.exec("SELECT * from school_form_stats where num in (#{transformed_codes.join(',')})") do |result|
-      p "SELECT * from school_form_stats where num in (#{transformed_codes.join(',')})"
-      result.each_with_index do |row, i|
-        field_name_1 = "untitled#{counter}"
-        field_name_2 = "untitled#{counter+1}"
-        field_name_3 = "untitled#{counter+2}"
-
-        counter += 3
-
+      result.each_with_index do |row|
         name, grade, num = row.values_at('name', 'grade', 'num')
+
+        code_index = split_codes.find_index(num)
+
+        field_name_1 = "untitled#{field_map[code_index][0]}"
+        field_name_2 = "untitled#{field_map[code_index][1]}"
+        field_name_3 = "untitled#{field_map[code_index][2]}"
 
         pdf.set_field(field_name_1.to_sym, grade)
         pdf.set_field(field_name_2.to_sym, name)
