@@ -15,10 +15,10 @@ In the root directory
 
 Contributors:
 
-[Casey Corcoran](https://www.linkedin.com/in/casey-corcoran/)
+[Casey Corcoran](https://www.linkedin.com/in/casey-corcoran/) (designer)
 
-[Daniel Omori](https://www.linkedin.com/in/daniel-omori/)
+[Daniel Omori](https://www.linkedin.com/in/daniel-omori/) (designer)
 
-[Alexandra Plassaras](https://www.linkedin.com/in/alexandraplassaras/)
+[Alexandra Plassaras](https://www.linkedin.com/in/alexandraplassaras/) (engineer/data scientist)
 
-[Angela Castanieto](https://www.linkedin.com/in/angelacastanieto/)
+[Angela Castanieto](https://www.linkedin.com/in/angelacastanieto/) (engineer)
