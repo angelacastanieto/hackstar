@@ -5,36 +5,13 @@ require 'fillable-pdf'
 
 class App < Sinatra::Base
   get "/" do
-    File.delete('output.pdf') if File.exist?('output.pdf')
-
-    # grade, zip
-    pdf = FillablePDF.new 'school_form_edit.pdf'
-
-    pdf.set_field(:untitled1, '')
-    pdf.set_field(:untitled2, '2')
-    pdf.set_field(:untitled3, '3')
-    pdf.set_field(:untitled4, '4')
-    pdf.set_field(:untitled5, '5')
-    pdf.set_field(:untitled6, '6')
-    pdf.set_field(:untitled7, '7')
-    pdf.set_field(:untitled8, '8')
-    pdf.set_field(:untitled9, '9')
-    pdf.set_field(:untitled10, '10')
-    pdf.set_field(:untitled11, '11')
-    pdf.set_field(:untitled12, '12')
-    pdf.set_field(:untitled13, '13')
-    pdf.set_field(:untitled14, '14')
-    pdf.set_field(:untitled15, '15')
-    pdf.save_as('output.pdf')
-
     erb :index
   end
 
   get "/pdf" do
-    File.delete('output.pdf') if File.exist?('output.pdf')
+    File.delete('form.pdf') if File.exist?('form.pdf')
 
-    # grade, zip
-    pdf = FillablePDF.new 'school_form_edit.pdf'
+    pdf = FillablePDF.new 'final_form.pdf'
     path = params['path']
 
     c1 = params['code1']
@@ -65,10 +42,10 @@ class App < Sinatra::Base
     pdf.set_field(:untitled13, path)
     pdf.set_field(:untitled14, s5)
     pdf.set_field(:untitled15, c5)
-    pdf.save_as('output.pdf')
+    pdf.save_as('form.pdf')
 
     headers "Content-Disposition" => "attachment", "Content-Type" => "application/pdf"
 
-    send_file(File.open('output.pdf'), :disposition => 'attachment', :filename => 'form.pdf')
+    send_file(File.open('form.pdf'), :disposition => 'attachment', :filename => 'form.pdf')
   end
 end
