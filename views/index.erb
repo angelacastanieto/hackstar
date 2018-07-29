@@ -1,9 +1,125 @@
-<!doctype html>
+
+<!DOCTYPE html>
 <html>
-  <head>
-    <!-- Style and javascript links -->
-  </head>
-  <body>
-    hi
-  </body>
+<head>
+    <meta charset='utf-8' />
+    <title>Display a map</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.47.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.47.0/mapbox-gl.css' rel='stylesheet' />
+    <style>
+        body { margin:0; padding:0; }
+        #map { position:absolute; top:0; bottom:0; width:100%; }
+        .marker {
+              background-image: url('mapbox-icon.png');
+              background-size: cover;
+              width: 25px;
+              height: 25px;
+              border-radius: 50%;
+              cursor: pointer;
+            }
+        .mapboxgl-popup {
+              max-width: 200px;
+            }
+
+            .mapboxgl-popup-content {
+              text-align: center;
+              font-family: 'Open Sans', sans-serif;
+            }
+    </style>
+</head>
+<body>
+
+<div id='map'></div>
+<script>
+mapboxgl.accessToken = 'pk.eyJ1IjoiNGxleCIsImEiOiJjams1eTZ5czUwcm55M3dreWc3czBra2poIn0.ca3ECH19wVm3HlQGdeUOPg';
+var map = new mapboxgl.Map({
+    container: 'map', // container id
+    style: 'mapbox://styles/mapbox/light-v9', // stylesheet location
+    center: [-122.41, 37.77], // starting position [lng, lat]
+    zoom: 12 // starting zoom
+});
+
+var geojson = {
+  type: 'FeatureCollection',
+  features: [{
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [ -122.4733887,37.7122993 ]
+    },
+    "properties": {
+    campus_name:"Saint Thomas More",
+    grade_range:"K-8",
+    address:"50 THOMAS MORE WAY, SAN FRANCISCO, CA 94132"
+    }
+  },
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [ -122.475296,37.7131233 ]
+    },
+     "properties": {
+    campus_name:"Jewish Community Center San Francisco - Brotherhood Way Preschool",
+    grade_range:"PK",
+    address:"655 BROTHERHOOD WAY, SAN FRANCISCO, CA 94132"
+    }
+  }
+  ,
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [ -122.4756393,37.7134209]
+    },
+     "properties": {
+    campus_name:"Brandeis Hillel School Of San Francisco",
+    grade_range:"K-8",
+    address:"655 BROTHERHOOD WAY, SAN FRANCISCO, CA 94132"
+    }
+  },
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [ -122.4783173,37.7138405 ]
+    },
+     "properties": {
+    campus_name:"Kzv Armenian School - Krouzian Zekarian Armenian School",
+    grade_range:"PK-",
+    address:"825 BROTHERHOOD WAY, SAN FRANCISCO, CA 94132"
+    }
+  },
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [ -122.4655762,37.7144966 ]
+    },
+     "properties": {
+    campus_name:"Economic Opportunity Council Sf - Omi Childcare",
+    grade_range:"PK",
+    address:"306 RANDOLPH ST, SAN FRANCISCO, CA 94132"
+    }
+  }]
+};
+
+// add markers to map
+geojson.features.forEach(function(marker) {
+
+  // create a HTML element for each feature
+  var el = document.createElement('div');
+  el.className = 'marker';
+
+  // make a marker for each feature and add to the map
+  new mapboxgl.Marker(el)
+  .setLngLat(marker.geometry.coordinates)
+  .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
+  .setHTML('<h3>' + marker.properties.campus_name + '</h3><p>' + marker.properties.address  + '</h3><p>' + marker.properties.grade_range + '</p>'))
+  .addTo(map);
+});
+</script>
+
+</body>
 </html>
