@@ -9,5 +9,15 @@ class SchoolStats < ActiveRecord::Migration[5.2]
       t.boolean :transportation_provided, null: false, default: false
       t.string :language_immersion, null: false, default: ""
     end
+
+    create_table :school_stats_2 do |t|
+      t.string :lat, null: false, default: ""
+      t.string :lon, null: false, default: ""
+      t.string :name, null: false, default: ""
+      t.string :address, null: false, default: ""
+      t.string :grade, null: false, default: ""
+      t.boolean :transportation_provided, null: false, default: false
+      t.string :language_immersion, null: false, default: ""
+    end
   end
 end
