@@ -12,7 +12,11 @@ In the root directory
 3. `rackup`
 
 Contributors:
+
 [Casey Corcoran](https://www.linkedin.com/in/casey-corcoran/)
+
 [Daniel Omori](https://www.linkedin.com/in/daniel-omori/)
+
 [Alexandra Plassaras](https://www.linkedin.com/in/alexandraplassaras/)
+
 [Angela Castanieto](https://www.linkedin.com/in/angelacastanieto/)
