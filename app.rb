@@ -14,21 +14,20 @@ class App < Sinatra::Base
 
 
     File.delete('form.pdf') if File.exist?('form.pdf')
-    c1 = params['code1']
-    c2 = params['code2']
-    c3 = params['code3']
-    c4 = params['code4']
-    c5 = params['code5']
+    codes = params['codes']
 
-    code_arr = ["'#{c1}'","'#{c2}'","'#{c3}'","'#{c4}'","'#{c5}'"]
+    transformed_codes = []
 
-    code_arr_clean = code_arr.reject { |c| c == "''" }
+    codes.split(',').each do |code|
+      transformed_codes << "'#{code}'"
+    end
 
     conn = PG.connect( dbname: 'hh_proj' )
 
     counter = 1
 
-    conn.exec("SELECT * from school_form_stats where num in (#{code_arr_clean.join(',')})") do |result|
+    conn.exec("SELECT * from school_form_stats where num in (#{transformed_codes.join(',')})") do |result|
+      p "SELECT * from school_form_stats where num in (#{transformed_codes.join(',')})"
       result.each_with_index do |row, i|
         field_name_1 = "untitled#{counter}"
         field_name_2 = "untitled#{counter+1}"
