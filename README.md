@@ -2,7 +2,7 @@
 
 SchoolFinder SF is a project built for the 2018 Girls In Tech Hacking For Humanity hackathon
 
-Hackathon submission details can be found [here](https://bluemixathon.devpost.com/updates/4062-inspiration-humanitarian-tech-orgs-new-app-ideas-tools-glossary)
+Hackathon submission can be found [here](https://devpost.com/software/sf-school-search)
 
 Design prototypes: https://invis.io/TPN87S3QHV2#/311409220_Home_-blank-
 
